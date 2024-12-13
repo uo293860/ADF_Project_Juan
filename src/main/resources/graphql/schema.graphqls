@@ -1,0 +1,43 @@
+type Pet {
+    id: Int,
+    name: String,
+    animalType: String,
+    breed: String,
+    age: Int,
+    household: Household
+}
+
+type Household{
+    eircode: String,
+    numberOfOccupants: Int,
+    maxNumberOfOccupants: Int,
+    ownerOccupied: Boolean
+}
+
+type Statistics{
+    averageAge: Float,
+    oldestAge: Int
+}
+
+# Defines the queries that can be performed
+type Query {
+    findAllHouseholds: [Household],
+    findAllPetsByAnimalType(animalType: String!): [Pet]
+    findHouseholdByEircode(eircode: String!): Household,
+    findPetById(id: Int!): Pet,
+    findAllStatistics: [Statistics]
+}
+
+input AddHousehold {
+    eircode: String!,
+    numberOfOccupants: Int,
+    maxNumberOfOccupants: Int,
+    ownerOccupied: Boolean
+}
+
+# Defines the mutations that can be performed, such as creating or deleting a hero
+type Mutation {
+    createHousehold(household: AddHousehold!): Household,
+    deleteHousehold(eircode: String!): Int,
+    deletePet(id: Int!): Int
+}
